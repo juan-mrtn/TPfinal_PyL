@@ -3,13 +3,13 @@ class AFD:
         self.estado_actual = 'q0'
         self.estado_final = {'q7'}
         self.transiciones = {
-            'q0': {'M': 'q1', 'D': 'muerto', 'S': 'muerto', 'm': 'muerto', 'muerto': 'muerto'},
-            'q1': {'D': 'q2', 'M': 'q3', 'm': 'q3', 'S': 'q3', 'muerto': 'muerto'},
-            'q2': {'D': 'q4', 'M': 'q5', 'm': 'q5', 'S': 'q5', 'muerto': 'muerto'},
-            'q3': {'D': 'q5', 'M': 'muerto', 'm': 'muerto', 'S': 'muerto', 'muerto': 'muerto'},
-            'q4': {'D': 'q6', 'M': 'q6', 'm': 'q6', 'S': 'q6', 'muerto': 'muerto'},
-            'q5': {'D': 'q6', 'M': 'muerto', 'm': 'muerto', 'S': 'muerto', 'muerto': 'muerto'},
-            'q6': {'m': 'q7', 'D': 'muerto', 'M': 'muerto', 'S': 'muerto', 'muerto': 'muerto'},
+            'q0': {'D': 'q5', 'M': 'q1', 'S': 'q2', 'm': 'q3', 'muerto': 'muerto'},
+            'q1': {'D': 'q5', 'M': 'q2', 'm': 'q2', 'S': 'q2', 'muerto': 'muerto'},
+            'q2': {'D': 'q3', 'M': 'muerto', 'm': 'muerto', 'S': 'muerto', 'muerto': 'muerto'},
+            'q3': {'D': 'q4', 'M': 'muerto', 'm': 'muerto', 'S': 'muerto', 'muerto': 'muerto'},
+            'q4': {'D': 'muerto', 'M': 'muerto', 'm': 'q7', 'S': 'muerto', 'muerto': 'muerto'},
+            'q5': {'D': 'q6', 'M': 'q3', 'm': 'q3', 'S': 'q3', 'muerto': 'muerto'},
+            'q6': {'D': 'q4', 'm': 'q4', 'M': 'q4', 'S': 'q4', 'muerto': 'muerto'},
             'q7': {'D': 'muerto', 'M': 'muerto', 'S': 'muerto', 'm': 'muerto', 'muerto': 'muerto'},
             'muerto': {'D': 'muerto', 'M': 'muerto', 'S': 'muerto', 'm': 'muerto', 'muerto': 'muerto'}
         }
@@ -38,7 +38,6 @@ class AFD:
     def acepta(self, cadena):
         self.reset()
         for simbolo in cadena:
-            print(self.transformar_caracter(simbolo))
             self.procesar(self.transformar_caracter(simbolo))
             #print(f"Procesando símbolo: {simbolo}, Simbolo Transformado: {self.transformar_caracter(simbolo)}, Estado actual: {self.estado_actual}")
         return self.estado_actual in self.estado_final
@@ -47,7 +46,7 @@ afd = AFD()
 
 c = input("Ingrese una cadena de 5 caracteres: ")
 while c != "":
-    c = input("Ingrese una cadena de 5 caracteres: ")
+    
     if afd.acepta(c):
         print()
         print("-----------------------------")
@@ -56,9 +55,11 @@ while c != "":
     else:
         print()
         print("-----------------------------")
-        print("Cadena no aceptada")
+        print("Cadena Rechazada")
         print("-----------------------------")
     print()
+    c = input("Ingrese una cadena de 5 caracteres: ")
+
 
 
 
