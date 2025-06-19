@@ -32,33 +32,29 @@ class AFD:
 
         
     def procesar(self, simbolo):
-        #if simbolo in self.transiciones[self.estado_actual]:
         self.estado_actual = self.transiciones[self.estado_actual][simbolo]
 
     def acepta(self, cadena):
         self.reset()
         for simbolo in cadena:
             self.procesar(self.transformar_caracter(simbolo))
-            #print(f"Procesando símbolo: {simbolo}, Simbolo Transformado: {self.transformar_caracter(simbolo)}, Estado actual: {self.estado_actual}")
         return self.estado_actual in self.estado_final
 
 afd = AFD()
 
 c = input("Ingrese una cadena de 5 caracteres: ")
-while c != "":
-    
-    if afd.acepta(c):
-        print()
-        print("-----------------------------")
-        print("Cadena aceptada")
-        print("-----------------------------")
-    else:
-        print()
-        print("-----------------------------")
-        print("Cadena Rechazada")
-        print("-----------------------------")
+  
+if afd.acepta(c):
     print()
-    c = input("Ingrese una cadena de 5 caracteres: ")
+    print("-----------------------------")
+    print("Cadena aceptada")
+    print("-----------------------------")
+else:
+    print()
+    print("-----------------------------")
+    print("Cadena Rechazada")
+    print("-----------------------------")
+
 
 
 
